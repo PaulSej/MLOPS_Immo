@@ -1,0 +1,12 @@
+
+    
+    
+#myRootContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /*border: solid 4px green;*/
+    background-color: bisque;
+    margin: 0;
+
+}

@@ -1,0 +1,8 @@
+.gameConfig-panel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: solid 5px red;
+}
