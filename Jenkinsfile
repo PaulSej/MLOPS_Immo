@@ -53,7 +53,13 @@ pipeline {
                 sshagent(credentials : ['ssh-cred']) {
                     sh 'ssh -o StrictHostKeyChecking=no mlops@first-webserver uptime'
                     sh 'ssh -v mlops@first-webserver'
-                    sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+                    sh 'scp ./docker-compose.prod.yml mlops@first-webserver:/home/mlops/immo-price-prediction-website/'
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
+                         sh "docker pull paulsjn/frontend:latest"
+                         sh "docker pull paulsjn/backend:latest"
+                    }
+                    sh 'docker compose -f docker-compose.prod.yml'
+                    echo "App has been deployed in production with success !"
                 }
 
                 sh ssh mlops@192.168.1.14

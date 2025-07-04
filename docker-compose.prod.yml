@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image: paulsjn/frontend
+    ports:
+      - "80:80"
+
+          
+  
+  backend:
+    image: paulsjn/backend
+    ports:
+      - "5000:5000"
+
