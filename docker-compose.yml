@@ -1,0 +1,51 @@
+services:
+  frontend:
+    #image: paulsjn/frontend
+    build: 
+      context: ./frontend/
+    ports:
+      - "80:80"
+    #command: yarn start-watch
+    # volumes:
+    #   - ./frontend:/app
+    #   - ./frontend/node_modules:/app/node_modules
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app
+          ignore: 
+            - node_modules
+        - action: rebuild
+          path: ./package.json
+          #target: /app
+          
+          
+  
+  backend:
+    #image: paulsjn/backend
+    build: ./backend
+    ports:
+      - "5000:5000"
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /flask-api # target is the folder in the container file system containing the app
+        - action: rebuild
+          path: ./backend/requirements.txt
+
+
+
+  # webserver:
+  #   image: nginx
+  #   build: ./webserver
+  #   ports:
+  #     - 8080:80
+  #   depends_on:
+  #     - website_instance1
+  #     - website_instance2
+  #   develop:
+  #     watch:
+  #       - action:sync+restart
+  #       - path: ./webserver/nginx.conf

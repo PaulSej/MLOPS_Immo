@@ -1,8 +1,34 @@
 .gameConfig-panel{
+    color: white;
+    background-color: rgba(20, 20, 20, 0.4);
+    border-radius: 20px;
+    margin: auto;
+    width: 50%;
+    padding: 30px;
+    /*
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     border: solid 5px red;
+    */
 }
+
+.gameConfig-panel div{
+    margin: 5px;
+}
+
+div > *{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+button{
+    margin: auto;
+    margin-top: 25px;
+    width: 100px;
+    height: 35px;
+}
+

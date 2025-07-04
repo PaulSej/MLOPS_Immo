@@ -6,7 +6,8 @@
     flex-direction: column;
     height: 100vh;
     /*border: solid 4px green;*/
-    background-color: rgb(175, 202, 123);
+    /*background-color: rgb(236, 238, 149);*/
+    background-image: url("../../public/background.jpg");
     margin: 0;
 
 }
