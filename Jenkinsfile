@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                      withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
-                         sh "docker compose up -d"
+                         sh "docker compose -f docker-compose.ci.yml up -d"
                          
                     }
                 }
@@ -58,14 +58,10 @@ pipeline {
                          sh "docker pull paulsjn/frontend:latest"
                          sh "docker pull paulsjn/backend:latest"
                     }
-                    sh 'docker compose -f docker-compose.prod.yml'
+                    sh 'docker compose -f docker-compose.prod.yml up -d'
                     echo "App has been deployed in production with success !"
                 }
 
-                sh ssh mlops@192.168.1.14
-                sh docker pull paulsjn/docker_project_images
-                sh ftp docker-compose.yml
-                sh docker compose up -d
             }
         }
     }
