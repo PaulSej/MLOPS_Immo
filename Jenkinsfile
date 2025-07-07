@@ -10,12 +10,9 @@ pipeline {
 
             stage('Build & Tag Docker Image') {
                 steps {
-                    script {
-                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
-                            sh "docker compose -f docker-compose.ci.yml up -d"
-                            
-                        }
-                    }
+
+                        sh "docker compose -f docker-compose.ci.yml up -d"
+
                 }
             }
 
