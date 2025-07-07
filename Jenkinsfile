@@ -12,7 +12,6 @@ pipeline {
                 steps {
                         sh "docker --version"
                         sh "docker compose -f docker-compose.ci.yml up -d"
-                        echo "Hello 3"
                         
 
                 }
@@ -21,7 +20,8 @@ pipeline {
 
             stage('Test') {
                 steps {
-                    sh "python end_to_end_test.py"
+                    sh "python3 --version"
+                    sh "python3 end_to_end_test.py"
                 }
                 
             }
