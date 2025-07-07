@@ -11,8 +11,8 @@ pipeline {
             stage('Build & Tag Docker Image') {
                 steps {
                         sh "docker --version"
-                        sh "docker compose --version"
-                        sh "docker compose -f docker-compose.ci.yml up"
+                        sh "docker build -f paulsjn/frontend ./frontend"
+                        sh "docker compose -f docker-compose.ci.yml up -d"
                         echo "Hello 3"
                         
 
