@@ -5,6 +5,7 @@ pipeline {
                 steps {
                     git branch: 'release_1.0', credentialsId: 'git-cred', url: 'https://github.com/PaulSej/Les_400_coups_d_Emilien.git'
                 }
+            }
 
 
             stage('Build & Tag Docker Image') {
@@ -16,6 +17,7 @@ pipeline {
                         }
                     }
                 }
+            }
 
 
             stage('Test') {
@@ -66,6 +68,5 @@ pipeline {
 
 
 
-        }
     }
 }
