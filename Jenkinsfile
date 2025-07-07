@@ -56,8 +56,8 @@ pipeline {
                     scp ./docker-compose.prod.yml mlops@first-webserver:/home/mlops/immo-price-prediction-website/
                     '''
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
-                         sh "docker pull paulsjn/mlops-immo/frontend:latest"
-                         sh "docker pull paulsjn/mlops-immo/backend:latest"
+                         sh "ssh -v mlops@first-webserver docker pull paulsjn/mlops-immo/frontend:latest"
+                         sh "ssh -v mlops@first-webserver docker pull paulsjn/mlops-immo/backend:latest"
                     }
                     sh 'ssh -v mlops@first-webserver docker compose -f docker-compose.prod.yml up -d'
                     echo "App has been deployed in production with success !"
