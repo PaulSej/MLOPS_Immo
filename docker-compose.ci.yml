@@ -35,6 +35,8 @@ services:
         - action: rebuild
           path: ./backend/requirements.txt
 
+ 
+
 
 # Nginx is in the frontend section, same Dockerfile as React
   # webserver:
