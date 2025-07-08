@@ -63,18 +63,16 @@ pipeline {
 
                     script {
                         sshagent(credentials : ['ssh-cred']) {
-                            sh "scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/"
-                            docker.withServer("ssh://192.168.1.14", "ssh-cred") {
-                                withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-
-                                    sh '''
-                                    docker pull paulsjn/mlops-immo:frontend 
-                                    docker pull paulsjn/mlops-immo:backend
-                                    cd /home/mlops/immo-price-prediction-website/
-                                    docker compose -f docker-compose.prod.yml up -d
-                                    '''
-                                }
-                            }
+                            sh """
+                            scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/"
+                            ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14
+                            docker login -u paulsjn -p ${docker-cred}
+                            docker pull paulsjn/mlops-immo:frontend 
+                            docker pull paulsjn/mlops-immo:backend
+                            cd /home/mlops/immo-price-prediction-website/
+                            docker compose -f docker-compose.prod.yml up -d
+                            exit
+                            """                        
                         }
                     }
 
