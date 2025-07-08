@@ -1,13 +1,13 @@
 services:
   frontend:
-    image: paulsjn/frontend
+    image: paulsjn/mlops-immo:frontend
     ports:
       - "80:80"
 
           
   
   backend:
-    image: paulsjn/backend
+    image: paulsjn/mlops-immo:backend
     ports:
       - "5000:5000"
 

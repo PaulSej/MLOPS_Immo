@@ -37,8 +37,8 @@ pipeline {
                 steps {
                     script {
                         withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
-                            sh "docker push paulsjn/mlops-immo/frontend:latest"
-                            sh "docker push paulsjn/mlops-immo/backend:latest"
+                            sh "docker push paulsjn/mlops-immo:frontend"
+                            sh "docker push paulsjn/mlops-immo:backend"
                         }
                     }
                 }
@@ -55,13 +55,16 @@ pipeline {
                         '''
                         script {
                             withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
-                                sh "ssh -v mlops@first-webserver docker pull paulsjn/mlops-immo/frontend:latest"
-                                sh "ssh -v mlops@first-webserver docker pull paulsjn/mlops-immo/backend:latest"
+                                sh "ssh -v mlops@first-webserver docker pull paulsjn/mlops-immo:frontend"
+                                sh "ssh -v mlops@first-webserver docker pull paulsjn/mlops-immo:backend"
                             }
 
                         }
 
-                        sh 'ssh -v mlops@first-webserver docker compose -f docker-compose.prod.yml up -d'
+                        sh '''
+                        cd /home/mlops/immo-price-prediction-website/
+                        ssh -v mlops@first-webserver docker compose -f docker-compose.prod.yml up -d
+                        '''
                         echo "App has been deployed in production with success !"
                     }
 
