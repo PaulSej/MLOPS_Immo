@@ -29,7 +29,7 @@ pipeline {
 
             stage('Switch off app') {
                 steps {
-                    sh "docker compose down"
+                    sh "docker compose -f docker-compose.ci.yml down"
                 }
                 
             }
