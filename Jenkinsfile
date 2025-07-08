@@ -50,6 +50,7 @@ pipeline {
             stage('Removing image') {
                 steps {
                     sh "docker image rm -f 5ca a7d"
+                    sh "docker image ls"
                 }
             }
 
@@ -59,7 +60,7 @@ pipeline {
 
                     sshagent(credentials : ['ssh-cred']) {
                         sh '''
-                        ssh -o StrictHostKeyChecking=no mlops@first-webserver uptime
+                        ssh -o StrictHostKeyChecking=no mlops@192.168.1.14 uptime
                         scp ./docker-compose.prod.yml mlops@first-webserver:/home/mlops/immo-price-prediction-website/
                         '''
                         script {
