@@ -39,7 +39,7 @@ pipeline {
                     script {
                         sh "docker image ls"
                         
-                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'docker.io/paulsjn/mlops-immo') {
+                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                             sh "docker push paulsjn/mlops-immo:frontend"
                             sh "docker push paulsjn/mlops-immo:backend"
                         }
