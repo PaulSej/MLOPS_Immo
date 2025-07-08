@@ -60,8 +60,28 @@ pipeline {
         
             stage('Deploy') {
                 steps{
+
                     script {
-                        sshagent(credentials : ['ssh-cred', 'docker-cred']) {
+                        sshagent(credentials : ['ssh-cred']) {
+                            sh "scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/"
+                            docker.withServer("ssh://192.168.1.14", "ssh-cred") {
+                                withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+
+                                    sh '''
+                                    docker pull paulsjn/mlops-immo:frontend 
+                                    docker pull paulsjn/mlops-immo:backend
+                                    cd /home/mlops/immo-price-prediction-website/
+                                    docker compose -f docker-compose.prod.yml up -d
+                                    '''
+                                }
+                            }
+                        }
+                    }
+
+
+                    /*
+                    script {
+                        sshagent(credentials : ['ssh-cred']) {
 
                             sh '''
                             scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/
@@ -80,6 +100,7 @@ pipeline {
                         }
 
                     }
+                    */
 
                     echo "App has been deployed in production with success !"
                 }
