@@ -40,9 +40,10 @@ pipeline {
                         sh "docker image ls"
                         
                         withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            /*sh "docker login -u paulsjn -p ${docker-cred}"*/
+                            /*sh "docker login -u paulsjn -p ${docker-cred}"
                             sh "docker push paulsjn/mlops-immo:frontend"
-                            sh "docker push paulsjn/mlops-immo:backend"
+                            sh "docker push paulsjn/mlops-immo:backend"*/
+                            sh "docker push --all-tags paulsjn/mlops-immo"
                         }
                     }
                 }
