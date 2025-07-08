@@ -39,12 +39,16 @@ pipeline {
                     script {
                         sh "docker image ls"
                         
-                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker') {
+                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com') {
                             sh "docker push paulsjn/mlops-immo:frontend"
                             sh "docker push paulsjn/mlops-immo:backend"
                         }
                     }
                 }
+            }
+
+            stage('Removing image') {
+                sh "docker rmi"
             }
 
         
