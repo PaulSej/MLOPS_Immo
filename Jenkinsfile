@@ -49,7 +49,7 @@ pipeline {
 
             stage('Removing image') {
                 steps {
-                    sh "docker rmi"
+                    sh "docker image rm -f 5ca a7d"
                 }
             }
 
