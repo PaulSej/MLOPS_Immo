@@ -39,7 +39,7 @@ pipeline {
                     script {
                         sh "docker image ls"
                         
-                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: "https://index.docker.io/v1/") {
+                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                             /*sh "docker login -u paulsjn -p ${docker-cred}"*/
                             sh "docker push paulsjn/mlops-immo:frontend"
                             sh "docker push paulsjn/mlops-immo:backend"
@@ -66,7 +66,7 @@ pipeline {
                         scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/
                         '''
                         script {
-                            withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: "https://index.docker.io/v1/") {
+                            withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                                 /*sh "docker login -u paulsjn -p ${docker-cred}"*/
                                 sh "ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 docker pull paulsjn/mlops-immo:frontend"
                                 sh "ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 docker pull paulsjn/mlops-immo:backend"
