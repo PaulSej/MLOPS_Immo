@@ -61,19 +61,19 @@ pipeline {
                     sshagent(credentials : ['ssh-cred']) {
                         sh '''
                         ssh -o StrictHostKeyChecking=no mlops@192.168.1.14 uptime
-                        scp ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/
+                        scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/
                         '''
                         script {
                             withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                                sh "ssh -v mlops@192.168.1.14 docker pull paulsjn/mlops-immo:frontend"
-                                sh "ssh -v mlops@192.168.1.14 docker pull paulsjn/mlops-immo:backend"
+                                sh "ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 docker pull paulsjn/mlops-immo:frontend"
+                                sh "ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 docker pull paulsjn/mlops-immo:backend"
                             }
 
                         }
 
                         sh '''
-                        ssh -v mlops@192.168.1.14 cd /home/mlops/immo-price-prediction-website/
-                        ssh -v mlops@192.168.1.14 docker compose -f docker-compose.prod.yml up -d
+                        ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 cd /home/mlops/immo-price-prediction-website/
+                        ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 docker compose -f docker-compose.prod.yml up -d
                         '''
                         echo "App has been deployed in production with success !"
                     }
