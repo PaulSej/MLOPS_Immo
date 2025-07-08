@@ -37,6 +37,7 @@ pipeline {
             stage('Deliver/Push Docker Image') {
                 steps {
                     script {
+                        sh "docker image ls"
                         withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker', url: 'hub.docker.com/repository/docker/paulsjn/mlops-immo') {
                             sh "docker push paulsjn/mlops-immo:frontend"
                             sh "docker push paulsjn/mlops-immo:backend"
