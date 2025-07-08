@@ -50,6 +50,7 @@ pipeline {
 
             stage('Removing image') {
                 steps {
+                    sh "docker image ls"
                     sh "docker image rm -f 5ca a7d"
                     sh "docker image ls"
                 }
