@@ -72,14 +72,11 @@ pipeline {
 
                                 docker pull paulsjn/mlops-immo:frontend 
                                 docker pull paulsjn/mlops-immo:backend
+                                cd /home/mlops/immo-price-prediction-website/
+                                docker compose -f docker-compose.prod.yml up -d
                                 """
                             }
-                            sh '''
-                            whoami
-                            hostname
-                            cd /home/mlops/immo-price-prediction-website/
-                            docker compose -f docker-compose.prod.yml up -d
-                            '''
+
                             echo "App has been deployed in production with success !"
                         }
 
