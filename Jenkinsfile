@@ -60,33 +60,39 @@ pipeline {
         
             stage('Deploy') {
                 steps{
+                    script {
+                        sshagent(credentials : ['ssh-cred']) {
 
-                    sshagent(credentials : ['ssh-cred']) {
-                        sh '''
-                        ssh -o StrictHostKeyChecking=no mlops@192.168.1.14 uptime
-                        scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/
-                        '''
-                        script {
+                            sh '''
+                            scp -o StrictHostKeyChecking=no ./docker-compose.prod.yml mlops@192.168.1.14:/home/mlops/immo-price-prediction-website/
+                            ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14
+                            '''
                             withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                                 sh """
-                                ssh -o StrictHostKeyChecking=no mlops@192.168.1.14 && \
-                                docker login -u paulsjn -p ${docker-cred} && \
-                                docker pull paulsjn/mlops-immo:frontend && \
-                                docker pull paulsjn/mlops-immo:backend && \
+
+                                docker pull paulsjn/mlops-immo:frontend 
+                                docker pull paulsjn/mlops-immo:backend
                                 """
                             }
-
+                            sh '''
+                            cd /home/mlops/immo-price-prediction-website/
+                            docker compose -f docker-compose.prod.yml up -d
+                            '''
+                            echo "App has been deployed in production with success !"
                         }
 
-                        sh '''
-                        ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 cd /home/mlops/immo-price-prediction-website/
-                        ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 docker compose -f docker-compose.prod.yml up -d
-                        '''
-                        echo "App has been deployed in production with success !"
                     }
 
                 }
             }
+    }
+
+
+    post {
+        always {
+            // Clean up workspace
+            cleanWs()
+        }
     }
 
 
