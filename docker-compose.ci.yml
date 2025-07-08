@@ -1,8 +1,9 @@
 services:
   frontend:
-    #image: paulsjn/frontend
+
     build: 
       context: ./frontend/
+    image: paulsjn/frontend
     ports:
       - "80:80"
     #command: yarn start-watch
@@ -23,8 +24,9 @@ services:
           
   
   backend:
-    #image: paulsjn/backend
     build: ./backend
+    image: paulsjn/backend
+
     ports:
       - "5000:5000"
     develop:
