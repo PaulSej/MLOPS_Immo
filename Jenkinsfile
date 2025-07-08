@@ -75,6 +75,8 @@ pipeline {
                                 """
                             }
                             sh '''
+                            whoami
+                            hostname
                             cd /home/mlops/immo-price-prediction-website/
                             docker compose -f docker-compose.prod.yml up -d
                             '''
