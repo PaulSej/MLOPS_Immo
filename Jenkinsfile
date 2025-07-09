@@ -13,13 +13,13 @@ pipeline {
             
             stage('Build & Tag Docker Image') {
                 steps {
-                    script{
-                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                            sh "docker --version"
-                            /* You should manually deleteotherwise will pull existing old image version as there is no new tag (to put all images is the only free private repo offered by docker hub)*/
-                            sh "docker compose -f docker-compose.ci.yml up -d"
-                        }
-                    }    
+
+                    sh "docker --version"
+                    /* You should manually delete otherwise will pull existing old image version as there is no new tag (to put all images is the only free private repo offered by docker hub)*/
+
+                    sh "docker compose -f docker-compose.ci.yml up -d"
+
+            
 
                 }
             }
