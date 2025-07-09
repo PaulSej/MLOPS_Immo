@@ -15,7 +15,7 @@ cors = CORS(app) # allow CORS for all domains on all routes.
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # , resources={r"/predict": {"origins": "http://localhost"}}  
-
+# origin='localhost',headers=['Content-Type']
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ def home():
     return jsonify({"welcome": "Welcome to Flask with Docker! Does hot reload features works?"})
 
 @app.route('/predict', methods=['POST'])
-@cross_origin(origin='localhost',headers=['Content-Type'])
+@cross_origin()
 def predict():
     
     python_dict_predictor = request.get_json()
