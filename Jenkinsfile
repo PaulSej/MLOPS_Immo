@@ -10,7 +10,7 @@ pipeline {
                 }
             }
 
-
+            /*
             stage('Build & Tag Docker Image') {
                 steps {
                     script{
@@ -22,7 +22,7 @@ pipeline {
 
                 }
             }
-
+            */
             
             stage('Test') {
                 steps {
@@ -35,13 +35,14 @@ pipeline {
                 
             }
             
-
+            /*
             stage('Switch off app') {
                 steps {
                     sh "docker compose -f docker-compose.ci.yml down"
                 }
                 
             }
+            */
         
             stage('Deliver/Push Docker Image') {
                 steps {
@@ -78,7 +79,8 @@ pipeline {
                                 sh 'ssh -v -o StrictHostKeyChecking=no mlops@192.168.1.14 "docker pull paulsjn/mlops-immo:frontend && \
                                 docker pull paulsjn/mlops-immo:backend && \
                                 cd /home/mlops/immo-price-prediction-website/ && \
-                                docker compose -f docker-compose.prod.yml up -d"'
+                                docker compose -f docker-compose.prod.yml up -d && \
+                                exit"'
                             
                             }
                         }
