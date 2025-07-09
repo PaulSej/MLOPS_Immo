@@ -6,7 +6,7 @@ function StartButton({onSubmitFormTrigger}) {
         e.stopPropagation()
         onSubmitFormTrigger()
     }
-    return <button type="submit" onClick={triggerClickEvent}>C'est parti !</button>
+    return <button type="submit" onClick={triggerClickEvent}>C'est parti ! Je ne vois pas de changement</button>
 }
 
 export default StartButton
