@@ -12,7 +12,7 @@ import logging
 
 app = Flask(__name__)
 cors = CORS(app) # allow CORS for all domains on all routes.
-app.config['CORS_HEADERS'] = 'Content-Type'
+#app.config['CORS_HEADERS'] = 'Content-Type'
 
 # , resources={r"/predict": {"origins": "http://localhost"}}  
 # origin='localhost',headers=['Content-Type']
