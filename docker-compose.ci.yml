@@ -1,6 +1,6 @@
 services:
   frontend:
-
+    # On vérifie que l'image n'existe pas déjà sur le registre docker
     build: 
       context: ./frontend/
     image: paulsjn/mlops-immo:frontend
