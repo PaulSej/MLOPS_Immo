@@ -11,11 +11,13 @@ pipeline {
 
             stage('Build & Tag Docker Image') {
                 steps {
-
-                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker --version"
-                        sh "docker compose -f docker-compose.ci.yml up -d"
+                    script{
+                        withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                            sh "docker --version"
+                            sh "docker compose -f docker-compose.ci.yml up -d"
+                        }
                     }
+
 
                         
 
