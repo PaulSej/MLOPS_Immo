@@ -46,7 +46,7 @@ function GameConfig() {
 
     const sendForm = () =>{
 
-        fetch("http://localhost:5000/predict", {
+        fetch("http://192.168.1.14:5000/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
