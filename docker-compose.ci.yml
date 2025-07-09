@@ -3,8 +3,7 @@ services:
     # On vérifie que l'image n'existe pas déjà sur le registre docker
     build: 
       context: ./frontend/
-    # On ne peut pas tagger directement l'image dans ce fichier car sinon au lieu de 
-    # reconstruire une image, docker fera toujours un pull de l'ancienne
+
     image: paulsjn/mlops-immo:frontend
     ports:
       - "80:80"

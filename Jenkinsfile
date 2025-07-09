@@ -14,6 +14,17 @@ pipeline {
             stage('Build & Tag Docker Image') {
                 steps {
 
+                    /*
+
+                    Attention !!!!!!
+                    Surtout ne pas s'identifier à pour cette première étape
+                    Sinon docker-compose.ci.yml va faire un pull de l'ancienne version des images
+                    au lieu de réaliser l'étape de build
+                    qui est justement l'objectif de cette étape...
+                        On ne peut pas tagger directement l'image dans ce fichier car sinon au lieu de 
+                        reconstruire une image, docker fera toujours un pull de l'ancienne
+                    */
+
                     sh "docker --version"
                     /* You should manually delete otherwise will pull existing old image version as there is no new tag (to put all images is the only free private repo offered by docker hub)*/
 
@@ -63,7 +74,7 @@ pipeline {
             stage('Removing image') {
                 steps {
                     sh "docker image ls"
-                    sh "docker image rm -f 5ca a7d"
+                    sh "docker image rm -f paulsjn/mlops-immo:frontend paulsjn/mlops-immo:backend"
                     sh "docker image ls"
                 }
             }
