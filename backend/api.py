@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 import pandas as pd
 import numpy as np
 import json
-import logging
+#import logging
 
 
 app = Flask(__name__)
@@ -16,8 +16,8 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}}) # allow CORS for all domai
 
 # , resources={r"/predict": {"origins": "http://localhost"}}  
 # origin='localhost',headers=['Content-Type']
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+#logging.basicConfig(level=logging.DEBUG)
+#logger = logging.getLogger(__name__)
 
 linear_regression_model = joblib.load("linear_regression_apartments_paris.pkl")
 
