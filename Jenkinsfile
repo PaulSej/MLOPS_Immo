@@ -10,7 +10,7 @@ pipeline {
                 }
             }
 
-            /*
+            
             stage('Build & Tag Docker Image') {
                 steps {
                     script{
@@ -22,7 +22,7 @@ pipeline {
 
                 }
             }
-            */
+            
             
             stage('Test') {
                 steps {
@@ -35,14 +35,14 @@ pipeline {
                 
             }
             
-            /*
+            
             stage('Switch off app') {
                 steps {
                     sh "docker compose -f docker-compose.ci.yml down"
                 }
                 
             }
-            */
+            
         
             stage('Deliver/Push Docker Image') {
                 steps {
