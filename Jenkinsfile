@@ -4,7 +4,9 @@ pipeline {
         stages {
             stage('Git Checkout') {
                 steps {
-                    git branch: 'release_1.0', credentialsId: 'git-cred', url: 'https://github.com/PaulSej/Les_400_coups_d_Emilien.git'
+                    git branch: 'release_1.0', 
+                    credentialsId: 'git-cred', 
+                    url: 'https://github.com/PaulSej/Les_400_coups_d_Emilien.git'
                 }
             }
 
@@ -16,10 +18,7 @@ pipeline {
                             sh "docker --version"
                             sh "docker compose -f docker-compose.ci.yml up -d"
                         }
-                    }
-
-
-                        
+                    }    
 
                 }
             }
