@@ -3,7 +3,7 @@ services:
     # On vérifie que l'image n'existe pas déjà sur le registre docker
     build: 
       context: ./frontend/
-    image: paulsjn/mlops-immo:frontend
+    #image: paulsjn/mlops-immo:frontend
     ports:
       - "80:80"
     #command: yarn start-watch
@@ -25,7 +25,7 @@ services:
   
   backend:
     build: ./backend
-    image: paulsjn/mlops-immo:backend
+    #image: paulsjn/mlops-immo:backend
 
     ports:
       - "5000:5000"
