@@ -9,11 +9,14 @@ function ApartmentFloorInput({onFillInput}) {
     return (
         <div>
             <label for="floor-input">Étage</label>
-            <input type="text" 
-                   id="floor-input" 
-                   name="floor-input" 
-                   onChange={(e) => sendInputDataToForm(e.target.value)}
-                   required/>
+            <input type="number" 
+                    placeholder="0 (RDC)"
+                    min="0"
+                    max="20" 
+                    id="floor-input" 
+                    name="floor-input" 
+                    onChange={(e) => sendInputDataToForm(e.target.value)}
+                    required/>
         </div>
         
     )

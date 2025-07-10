@@ -9,7 +9,10 @@ function BedroomsInput({onFillInput}) {
     return (
         <div>
             <label for="bedrooms-input">Nombre de chambres</label>
-            <input type="text" 
+            <input type="number"
+            placeholder="0"
+            min="0"
+            max="10"
             id="bedrooms-input" 
             name="bedrooms-input" 
             onChange={(e) => sendInputDataToForm(e.target.value)}

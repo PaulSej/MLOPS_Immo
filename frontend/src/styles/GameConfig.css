@@ -25,10 +25,14 @@ div > *{
     margin: 0;
 }
 
+div > input, select{
+    width: 100px;
+}
+
+
 button{
     margin: auto;
     margin-top: 25px;
     width: 100px;
     height: 35px;
 }
-
