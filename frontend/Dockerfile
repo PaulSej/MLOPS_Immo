@@ -11,6 +11,7 @@ EXPOSE 3000
 #set to build for production
 RUN yarn build
 
+#set for development
 #CMD ["yarn", "start-watch"]
 
 FROM nginx 
