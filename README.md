@@ -2,5 +2,9 @@
 
 Forecast apartments prices in Paris
 
-<video width="630" height="300" src="https://github.com/user-attachments/assets/c974f9d5-f17a-4169-92fe-d677e16526ba"></video>
+<img width="960" height="540" alt="live-demo-compressed" src="https://github.com/user-attachments/assets/d4a2ee11-d7ff-454f-b525-95f70bf0d2be" />
+
+
+
+
 
